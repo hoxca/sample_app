@@ -1,1 +1,1 @@
-Sample App with authentication
+Sample Rails App with authentication
