@@ -9,7 +9,7 @@ describe "StaticPages" do
   
     it "should have the content 'Sample App'" do
       visit '/static_pages/home'
-      page.should have_content('Sample App')
+      page.should have_content('You are on the Rails Tutorial')
     end
 
     it "should have the right title" do
@@ -27,7 +27,7 @@ describe "StaticPages" do
   
     it "should have the content 'Help'" do
       visit '/static_pages/help'
-      page.should have_content('Help')
+      page.should have_content('Get help on the Ruby')
     end
 
     it "should have the title 'Help'" do
@@ -40,7 +40,7 @@ describe "StaticPages" do
   describe "About page" do
     it "should have the content 'About Us'" do
       visit '/static_pages/about'
-      page.should have_content('About Us')
+      page.should have_content('We are legion')
     end
 
     it "should have the title 'About'" do
