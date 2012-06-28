@@ -15,4 +15,5 @@
 /tmp
 /doc
 
+/bundler_stubs
 .rails_generators~
