@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "StaticPages" do
 
-  let(:base_title) { "Tutorial Sample App |"}
+  let(:base_title) { "Tutorial Sample App"}
 
   describe "all pages routing should return 200" do
 
@@ -27,9 +27,14 @@ describe "StaticPages" do
 
     it "should have the right title" do
       page.should have_selector('title',
-                                :text => "#{base_title} Home")
+                                :text => "#{base_title}")
     end
-  end
+
+    it "should not have the 'Home' in full title" do
+      page.should_not have_selector('title',
+                                :text => "| Home")
+    end
+   end
 
   describe "Help page" do
     before(:each) do
@@ -42,7 +47,7 @@ describe "StaticPages" do
 
     it "should have the title 'Help'" do
       page.should have_selector('title', 
-                                :text => "#{base_title} Help")
+                                :text => "#{base_title} | Help")
     end
   end
 
@@ -57,7 +62,7 @@ describe "StaticPages" do
 
     it "should have the title 'About'" do
       page.should have_selector('title', 
-                                :text => "#{base_title} About")
+                                :text => "#{base_title} | About")
     end
    end
 
@@ -72,7 +77,7 @@ describe "StaticPages" do
 
     it "should have the title 'Contact'" do
       page.should have_selector('title',
-                                :text => "#{base_title} Contact" )
+                                :text => "#{base_title} | Contact" )
     end
 
   end
