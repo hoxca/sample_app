@@ -10,7 +10,7 @@ describe "StaticPages" do
       page_list = ["home","help","about","contact"]
       page_list.each do |page| 
         get "/static_pages/#{page}"
-        #response.status.should be(200)
+        response.status.should be(200)
       end
     end
 
