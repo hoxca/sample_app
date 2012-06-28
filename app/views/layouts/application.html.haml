@@ -7,5 +7,18 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
-    = yield
+    %header{ class: ["navbar","navbar-fixed-top"] }
+      %div{ class: ["navbar-inner"] }
+        %div{ class:  ["container"] }
+          %a{ href: '#', id: 'logo' }
+          %nav
+            %ul{ class: "nav pull-right"}
+              %li
+                %a{ href: '#', id: '' } Home
+              %li
+                %a{ href: '#', id: '' } Help
+              %li
+                %a{ href: '#', id: '' } Sign In
+    %div{ class: ["container"] }
+      = yield
  
