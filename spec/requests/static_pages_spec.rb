@@ -23,7 +23,8 @@ describe "StaticPages" do
       visit root_path
     end
     it { should have_content('This is the home page for') }
-    it { should have_selector('title', :text => "#{base_title}") }
+   # it { should have_selector('title', :text => "#{base_title}") }
+    it { should have_selector('title', text: full_title('')) }
     it { should_not have_selector('title', :text => "| Home") }
    end
 
@@ -33,6 +34,7 @@ describe "StaticPages" do
     end
     it { should have_content('Get help on the Ruby') }
     it { should have_selector('title', :text => "#{base_title} | Help") }
+    it { should have_selector('title', text: full_title('Help')) }
   end
 
   describe "About page" do
@@ -41,6 +43,7 @@ describe "StaticPages" do
     end
     it { should have_content('We are legion') }
     it { should have_selector('title', :text => "#{base_title} | About") }
+    it { should have_selector('title', text: full_title('About')) }
    end
 
   describe "Contact"  do
@@ -49,6 +52,7 @@ describe "StaticPages" do
     end
     it { should have_content('Contact Ruby on Rails') }
     it { should have_selector('title', :text => "#{base_title} | Contact" ) }
+    it { should have_selector('title', text: full_title('Contact')) }
   end
 
 end 
