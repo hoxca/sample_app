@@ -18,7 +18,7 @@ describe "StaticPages" do
 
   subject { page }
 
-  describe "visit home pages" do
+  describe "Home pages" do
     before(:each) do
       visit root_path
     end
