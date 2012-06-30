@@ -5,81 +5,50 @@ describe "StaticPages" do
   let(:base_title) { "Tutorial Sample App"}
 
   describe "all pages routing should return 200" do
-
+ 
     it "works! (now write some real specs)" do
-      page_list = ["home","help","about","contact"]
+      page_list = ["","help","about","contact"]
       page_list.each do |page| 
-        get "/static_pages/#{page}"
+        get "/#{page}"
         response.status.should be(200)
       end
     end
-
+ 
   end 
 
-  describe "GET /static_pages" do
+  subject { page }
+
+  describe "visit home pages" do
     before(:each) do
-      visit '/static_pages/home'
+      visit root_path
     end
-
-    it "should have the content 'Sample App'" do
-      page.should have_content('You are on the Rails Tutorial')
-    end
-
-    it "should have the right title" do
-      page.should have_selector('title',
-                                :text => "#{base_title}")
-    end
-
-    it "should not have the 'Home' in full title" do
-      page.should_not have_selector('title',
-                                :text => "| Home")
-    end
+    it { should have_content('This is the home page for') }
+    it { should have_selector('title', :text => "#{base_title}") }
+    it { should_not have_selector('title', :text => "| Home") }
    end
 
-  describe "Help page" do
+  describe "Help page"  do
     before(:each) do
-      visit '/static_pages/help'
+      visit help_path
     end
-  
-    it "should have the content 'Help'" do
-      page.should have_content('Get help on the Ruby')
-    end
-
-    it "should have the title 'Help'" do
-      page.should have_selector('title', 
-                                :text => "#{base_title} | Help")
-    end
+    it { should have_content('Get help on the Ruby') }
+    it { should have_selector('title', :text => "#{base_title} | Help") }
   end
 
   describe "About page" do
     before(:each) do
-      visit '/static_pages/about'
+      visit about_path
     end
-
-    it "should have the content 'About Us'" do
-      page.should have_content('We are legion')
-    end
-
-    it "should have the title 'About'" do
-      page.should have_selector('title', 
-                                :text => "#{base_title} | About")
-    end
+    it { should have_content('We are legion') }
+    it { should have_selector('title', :text => "#{base_title} | About") }
    end
 
-  describe "Contact page" do
+  describe "Contact"  do
     before(:each) do
-      visit '/static_pages/contact'
+      visit contact_path
     end
-
-    it "should have the content 'Contact Ruby on Rails'" do
-      page.should have_content('Contact Ruby on Rails')
-    end
-
-    it "should have the title 'Contact'" do
-      page.should have_selector('title',
-                                :text => "#{base_title} | Contact" )
-    end
-
+    it { should have_content('Contact Ruby on Rails') }
+    it { should have_selector('title', :text => "#{base_title} | Contact" ) }
   end
 
 end 

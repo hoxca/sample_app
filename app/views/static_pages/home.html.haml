@@ -1,5 +1,11 @@
-%h1 Sample App
-%p 
-  You are on the
-  %a{ :href=>"http://railstutorial.org/" } Rails Tutorial 
-%p thank you for your visit
+%div{ class: ["center","hero-unit"]}
+  %h1 Welcome to the Sample App
+  %h2
+    This is the home page for the
+    %a{ href: "http://railstutorial.org/" } Rails Tutorial
+    sample application.
+    %br
+    %a{ href: '#', class: ["btn","btn-large","btn-primary"] } Sign Up now !
+
+%a{ href: "http://rubyonrails.org" }
+  %img{ src: "/assets/rails.png", alt: "Rails" }
