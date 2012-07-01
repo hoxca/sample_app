@@ -14,10 +14,20 @@
 #  last_name   :string(255)
 
 class User < ActiveRecord::Base
-  attr_accessible :common_name, :email, :first_name, :last_name, :nickname
+  attr_accessible :common_name, :email, :first_name, :last_name, :nickname, :password, :password_confirmation
+  has_secure_password
+
 
   validates :common_name, :email, :first_name, :last_name, :nickname,  presence: true
   validates :common_name, length: { maximum: 50 }
   validates :first_name, length: { maximum: 30 }
   validates :last_name, length: { maximum: 30 }
+  validates :password, presence: true, length: { minimum: 6 }
+  validates :password_confirmation, presence: true
+
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :email, format: { with: VALID_EMAIL_REGEX } 
+
+  before_save { |user| user.email = email.downcase }
+
 end
