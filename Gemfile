@@ -12,6 +12,7 @@ group :development, :test do
   gem 'growl'
   gem 'guard-spork', '0.3.2'
   gem 'spork', '0.9.0'
+  gem 'factory_girl_rails'
 end
 
 gem 'annotate','~> 2.4.1.beta', group: :development
