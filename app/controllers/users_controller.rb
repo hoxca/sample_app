@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
   rescue_from ActiveRecord::StatementInvalid do |exception|
     if exception.message =~ /ConstraintException/
-      rescue_constraint
+      rescue_constraint(exception)
     else
       raise
     end
@@ -26,9 +26,9 @@ class UsersController < ApplicationController
   end
 
   protected
-  def rescue_constraint
+  def rescue_constraint(exception)
     @ex_message = "Email address already taken from another account !"
-    #logger.info "Trapped SQL Constraint: #{exception.message}"
+    logger.info "Trapped SQL Constraint: #{exception.message}"
     render 'new'
   end
 

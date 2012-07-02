@@ -90,19 +90,45 @@ describe "User:" do
   context "Create user" do
     describe "when email address is already taken" do
       before {
-       @user = User.create(nickname: "Hoxca", email: "hugh@atosc.org", common_name:"Hugues Obolonsky", first_name:"Hugues",last_name:"Obolonsky",password: "pwd42aaa", password_confirmation:"pwd42aaa")
+       @user = User.create(nickname: "Hoxca",
+                           email: "hugh@atosc.org",
+                           common_name:"Hugues Obolonsky",
+                           first_name:"Hugues",
+                           last_name:"Obolonsky",
+                           password: "pwd42aaa", 
+                           password_confirmation:"pwd42aaa")
       }
       it "then it should not save duplicates" do
-        expect { User.create(nickname: "User", email: "hugh@atosc.org", common_name: "User with Same Address", first_name:"User",last_name:"Same Address",password: "pwd42aaa", password_confirmation:"pwd42aaa") }.should raise_error
+        expect { User.create(nickname: "User",
+                             email: "hugh@atosc.org",
+                             common_name: "User with Same Address",
+                             first_name:"User",
+                             last_name:"Same Address",
+                             password: "pwd42aaa",
+                             password_confirmation:"pwd42aaa") 
+                }.should raise_error
       end
       it "then it should not save even if the case is different" do
-        expect { User.create(nickname: "User", email: "huGh@atosc.org", common_name: "User with Same Address", first_name:"User",last_name:"Same Address",password: "pwd42aaa", password_confirmation:"pwd42aaa") }.should raise_error
+        expect { User.create(nickname: "User",
+                             email: "huGh@atosc.org",
+                             common_name: "User with Same Address",
+                             first_name:"User",
+                             last_name:"Same Address",
+                             password: "pwd42aaa",
+                             password_confirmation:"pwd42aaa") 
+                }.should raise_error
       end
     end
   end  
 
   context "Authenticate" do
-    before { @user = User.new(nickname:"Hoxca", email:"hugh@atosc.org", common_name:"Hugues Obolonsky", first_name:"Hugues", last_name:"Obolonsky", password: "pwd42aaa", password_confirmation:"pwd42aaa") }
+    before { @user = User.new(nickname:"Hoxca",
+                              email:"hugh@atosc.org",
+                              common_name:"Hugues Obolonsky",
+                              first_name:"Hugues",
+                              last_name:"Obolonsky",
+                              password: "pwd42aaa",
+                              password_confirmation:"pwd42aaa") }
     subject { @user }
     describe "return value of authenticate method" do
       before { @user.save }
