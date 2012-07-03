@@ -20,7 +20,9 @@ describe "User:" do
     before { @user = User.new(nickname:"Hoxca", email:"hugh@atosc.org", common_name:"Hugues Obolonsky", first_name:"Hugues", last_name:"Obolonsky", password: "pwd42aaa", password_confirmation:"pwd42aaa") }
     subject { @user }
 
-    respond = ["common_name","nickname","email","first_name","last_name","password","password_confirmation","password_digest","authenticate"]
+    respond = ["common_name","nickname","email","first_name",
+               "last_name","password","password_confirmation",
+               "password_digest","authenticate","remember_token"]
     attributes = ["common_name","nickname","email","first_name","last_name","password","password_confirmation"]
 
     it { should be_valid }
@@ -64,6 +66,11 @@ describe "User:" do
     describe "with a password that's too short" do
       before { @user.password = @user.password_confirmation = "a" * 5 }
       it { should be_invalid }
+    end
+
+    describe "remember token" do
+      before { @user.save }
+      its(:remember_token) { should_not be_blank }
     end
 
     describe "when email format is invalid" do

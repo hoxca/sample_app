@@ -62,6 +62,7 @@ describe "UserPages" do
       before { click_button submit }
         it { should have_selector('title', text: 'nick') }
         it { should have_selector('div.alert.alert-success', text: "Welcome to the Sample App!") }
+        it { should have_link('Sign out') }
     end
 
     describe "should not raise sql exception with duplicate email" do

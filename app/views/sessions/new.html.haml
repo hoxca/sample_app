@@ -1,0 +1,17 @@
+= provide(:title,"Sign in")
+%h1 Sign in
+%div{ class: "row" }
+  %div{ class: ["span4","offset4"] }
+    = form_for :session, url: sessions_path do |f|
+
+      = f.label :email
+      = f.text_field :email, class: "user"
+
+      = f.label :password
+      = f.text_field :password, class: "user"
+      %br
+      %br
+      = f.submit "Sign in", class: "btn btn-large btn-primary"
+    New user?
+    = link_to "Sign up now!", signup_path
+      
