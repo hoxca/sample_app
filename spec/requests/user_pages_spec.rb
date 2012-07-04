@@ -88,7 +88,10 @@ describe "UserPages" do
 
   describe "edit" do
     let(:user) { FactoryGirl.create(:user) }
-    before { visit edit_user_path(user) }
+    before { 
+      sign_in user
+      visit edit_user_path(user) 
+    }
 
     describe "page" do
       it { should have_selector('h1',    text: "Update your profile") }
@@ -123,5 +126,25 @@ describe "UserPages" do
     end
 
  end
+
+  describe "index" do
+    before do
+      sign_in FactoryGirl.create(:user)
+      FactoryGirl.create(:user, common_name: "Bob Leponge", nickname: "bleponge", first_name: "Bob",
+                         last_name: "Leponge", email: "bob@example.com")
+      FactoryGirl.create(:user, common_name: "Ben Laden", nickname: "terror", first_name: "Ben",
+                         last_name: "Laden", email: "ben@example.com")
+      visit users_path
+    end
+
+    it { should have_selector('title', text: 'All users') }
+    it { should have_selector('h1',    text: 'All users') }
+
+    it "should list each user" do
+      User.all.each do |user|
+        page.should have_selector('li', text: user.common_name)
+      end
+    end
+  end
 
 end
