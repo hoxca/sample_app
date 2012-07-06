@@ -11,6 +11,8 @@
 #  created_at      :datetime        not null
 #  updated_at      :datetime        not null
 #  password_digest :string(255)
+#  remember_token  :string(255)
+#  admin           :boolean
 #
 
 require 'spec_helper'
@@ -22,10 +24,11 @@ describe "User:" do
 
     respond = ["common_name","nickname","email","first_name",
                "last_name","password","password_confirmation",
-               "password_digest","authenticate","remember_token"]
+               "password_digest","authenticate","remember_token","admin"]
     attributes = ["common_name","nickname","email","first_name","last_name","password","password_confirmation"]
 
     it { should be_valid }
+    it { should_not be_admin }
 
     respond.each do |attrname|
       it { should respond_to(attrname.to_sym) }
@@ -152,6 +155,21 @@ describe "User:" do
         specify { user_for_invalid_password.should be_false }
       end
     end
+  end
+
+  describe "with admin attribute set to 'true'" do
+    before do
+      @user = User.new(nickname:"Hoxca",
+                       email:"hugh@atosc.org",
+                       common_name:"Hugues Obolonsky",
+                       first_name:"Hugues",
+                       last_name:"Obolonsky",
+                       password: "pwd42aaa",
+                       password_confirmation:"pwd42aaa") 
+      @user.toggle!(:admin) 
+    end
+
+    it { @user.should be_admin }
   end
 
 end
