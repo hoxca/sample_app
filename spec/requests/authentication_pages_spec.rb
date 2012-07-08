@@ -115,6 +115,22 @@ describe "Authentication" do
       end
     end
 
+    describe "as admin user" do
+      let(:admin) { FactoryGirl.create(:admin) }
+
+      describe "should not delete yourself as admin !" do
+        before { 
+          sign_in admin
+          delete user_path(admin) 
+        }
+        specify { 
+          response.should redirect_to(users_path)
+          flash[:error].should == "Don't delete yourself !"
+        }
+      end
+
+    end
+
     describe "as right user" do
       let(:user) { FactoryGirl.create(:user) }
       before do
