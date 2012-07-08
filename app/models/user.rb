@@ -20,6 +20,8 @@ class User < ActiveRecord::Base
                   :password, :password_confirmation
 
   has_secure_password
+  has_many :microposts
+
 
   validates :common_name, :email, :first_name, :last_name, :nickname,  presence: true
   validates :common_name, length: { maximum: 50 }

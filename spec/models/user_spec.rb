@@ -36,7 +36,7 @@ describe "User:" do
 
     respond = ["common_name","nickname","email","first_name",
                "last_name","password","password_confirmation",
-               "password_digest","authenticate","remember_token","admin"]
+               "password_digest","authenticate","remember_token","admin","microposts"]
     attributes = ["common_name","nickname","email","first_name","last_name","password","password_confirmation"]
 
     it { should be_valid }
