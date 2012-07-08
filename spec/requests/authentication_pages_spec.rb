@@ -71,6 +71,12 @@ describe "Authentication" do
     let(:user) { FactoryGirl.create(:user) }
 
     describe "for non-signed-in users" do
+
+      describe "there is no to Profile and Settings" do
+        it { should_not have_link('Profile', href: user_path(user)) }
+        it { should_not have_link('Settings', href: edit_user_path(user)) }
+      end
+
       describe "in the Users controller" do
         describe "visiting the edit page" do
           before { visit edit_user_path(user) }
@@ -86,9 +92,7 @@ describe "Authentication" do
       describe "when attempting to visit a protected page" do
         before do
           visit edit_user_path(user)
-          fill_in "Email",    with: user.email
-          fill_in "Password", with: user.password
-          click_button "Sign in"
+          sign_in user
         end
 
         describe "after signing in" do
@@ -112,12 +116,26 @@ describe "Authentication" do
     end
 
     describe "as right user" do
+      let(:user) { FactoryGirl.create(:user) }
       before do
         sign_in user 
-        visit edit_user_path(user)
       end
 
-      it { should have_selector('title', text: full_title('Edit user')) }
+      describe "should see edit page" do
+        before { visit edit_user_path(user) }
+        it { should have_selector('title', text: full_title('Edit user')) }
+      end
+      
+      describe "signed user should not register via new" do
+        before { get new_user_path }
+        specify { response.should redirect_to(root_path) }
+      end
+
+      describe "signed user should not register via create" do
+        before { post users_path }
+        specify { response.should redirect_to(root_path) }
+      end
+
 
     end
 

@@ -16,9 +16,10 @@
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :common_name, :email, :first_name, :last_name, :nickname, :password, :password_confirmation
-  has_secure_password
+  attr_accessible :common_name, :email, :first_name, :last_name, :nickname,
+                  :password, :password_confirmation
 
+  has_secure_password
 
   validates :common_name, :email, :first_name, :last_name, :nickname,  presence: true
   validates :common_name, length: { maximum: 50 }

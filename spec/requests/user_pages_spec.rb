@@ -11,6 +11,7 @@ describe "UserPages" do
 
     it { should have_selector('h1', text: 'Sign Up') }
     it { should have_selector('title', text: full_title('Sign Up')) }
+
   end
 
   describe "profile page" do
@@ -68,9 +69,13 @@ describe "UserPages" do
     end
 
     describe "should not raise sql exception with duplicate email" do
-      it "should show a warning 'Email already taken'" do
+      before {
         click_button submit
+        click_link "Sign out"
         visit signup_path
+      }
+
+      it "should show a warning 'Email already taken'" do
         fill_in "Nickname",     with: "nick2"
         fill_in "Common name",  with: "Example User2"
         fill_in "First name",   with: "Example2"
@@ -125,7 +130,7 @@ describe "UserPages" do
       specify { user.reload.email.should == new_email }
     end
 
- end
+  end
 
   describe "index" do
     let(:user) { FactoryGirl.create(:user) }
@@ -140,12 +145,6 @@ describe "UserPages" do
 
     it { should have_selector('title', text: 'All users') }
     it { should have_selector('h1',    text: 'All users') }
-
-#     it "should list each user" do
-#       User.all.each do |user|
-#         page.should have_selector('li', text: user.common_name)
-#       end
-#     end
 
     describe "pagination" do
       it { should have_selector('div.pagination') }
