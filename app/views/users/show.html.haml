@@ -1,20 +1,29 @@
 = provide(:title,@user.nickname)
 %div{ class:"row" }
-  %aside{ class:"span6" }
+  %aside{ class:"span5" }
     %section
       %h1
         = gravatar_for @user, size: 80
         = @user.common_name
-%q
-  %ul
-    nickname: 
-    = @user.nickname
-    %br
-    first name: 
-    = @user.first_name
-    %br
-    last name: 
-    = @user.last_name
-    %br
-    email:
-    = @user.email
+    %q
+      %ul
+        nickname: 
+        = @user.nickname
+        %br
+        first name: 
+        = @user.first_name
+        %br
+        last name: 
+        = @user.last_name
+        %br
+        email:
+        = @user.email
+  %div{ class:"span7"}
+    - if @user.microposts.any?
+      %h3{ class: "microposts" } 
+        Microposts (
+        = @user.microposts.count
+        )
+      %ol{ class: "microposts"}
+        = render @microposts
+      = will_paginate @microposts

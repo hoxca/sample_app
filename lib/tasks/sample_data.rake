@@ -6,7 +6,7 @@ namespace :db do
                  first_name: "Hugues",
                  last_name: "Obolonsky",
                  nickname: "hoxca",
-                 email: "hoxca@atosc.org",
+                 email: "hugh@atosc.org",
                  password: "foobar",
                  password_confirmation: "foobar")
     admin.toggle!(:admin)
@@ -35,5 +35,12 @@ namespace :db do
                    password: password,
                    password_confirmation: password)
     end
+
+    users = User.all(limit: 6)
+    50.times do
+      content = Faker::Lorem.sentence(5)
+      users.each { |user| user.microposts.create!(content: content) }
+    end
+
   end
 end

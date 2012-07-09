@@ -4,6 +4,7 @@ class Micropost < ActiveRecord::Base
 
   default_scope order: 'microposts.created_at DESC'
 
-  validates :user_id, presence: true
+  validates :content, :user_id, presence: true
+  validates_length_of :content, :maximum => 140, :message => "Micropost must not exceed 140 characters"
 
 end
