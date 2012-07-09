@@ -1,11 +1,19 @@
-%div{ class: ["center","hero-unit"]}
-  %h1 Welcome to the Sample App
-  %h2
-    This is the home page for the
-    %a{ href: "http://railstutorial.org/" } Rails Tutorial
-    sample application.
-    %br
-    = link_to "Sign Up nown !", signup_path, class: ["btn","btn-large","btn-primary"]
+- if signed_in? 
+  %div{ class: "row" }
+    %aside{ class: "span5" }
+      %section
+        = render 'shared/user_info'
+      %section
+        = render 'shared/micropost_form'
+- else
+  %div{ class: ["center","hero-unit"]}
+    %h1 Welcome to the Sample App
+    %h2
+      This is the home page for the
+      %a{ href: "http://railstutorial.org/" } Rails Tutorial
+      sample application.
+      %br
+      = link_to "Sign Up nown !", signup_path, class: ["btn","btn-large","btn-primary"]
 
-%a{ href: "http://rubyonrails.org" }
-  %img{ src: "/assets/rails.png", alt: "Rails" }
+  %a{ href: "http://rubyonrails.org" }
+    %img{ src: "/assets/rails.png", alt: "Rails" }

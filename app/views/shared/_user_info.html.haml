@@ -1,0 +1,9 @@
+%a{ href: "#{user_path(current_user)}" } 
+  = gravatar_for current_user, size: 80
+%h1
+  = current_user.common_name
+%span{class: 'span2'}
+  = link_to "view my profile", current_user
+%span4
+  = pluralize(current_user.microposts.count, "micropost")
+
