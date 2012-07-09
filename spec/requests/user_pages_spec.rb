@@ -142,9 +142,9 @@ describe "UserPages" do
 
   end
 
-  describe "index" do
+  describe "index paination" do
     let(:user) { FactoryGirl.create(:user) }
-    
+
     before(:all) { 30.times { FactoryGirl.create(:user) }  }
     after(:all) { User.delete_all }
 
@@ -167,27 +167,38 @@ describe "UserPages" do
 
     end
 
-    describe "delete links" do
-      it { should_not have_link('delete') }
+  end
 
-      describe "as an admin user" do
-        let(:admin) { FactoryGirl.create(:admin) }
+  describe "index delete links" do
 
-        before do
-          sign_in admin
-          visit users_path
-        end
+    let!(:user) { FactoryGirl.create(:user) }
 
-        it { should have_link('delete', href: user_path(User.first)) }
-        it "should be able to delete another user" do
-          expect { click_link('delete') }.to change(User, :count).by(-1)
-          page.should have_content('User destroyed')
-        end
-        it { should_not have_link('delete', href: user_path(admin)) }
+    describe "as a user" do
+      before do
+        sign_in user
+        visit users_path
       end
-      
+  
+      it { should_not have_link('delete') }
     end
 
+    describe "as an admin user" do
+      let!(:admin) { FactoryGirl.create(:user) }
+
+      before do
+        admin.toggle!(:admin)
+        sign_in admin
+        visit users_path
+      end
+
+      it { should have_link('delete', href: user_path(User.first)) }
+      it "should be able to delete another user" do
+        expect { click_link('delete') }.to change(User, :count).by(-1)
+        page.should have_content('User destroyed')
+      end
+      it { should_not have_link('delete', href: user_path(admin)) }
+    end
+    
   end
 
 end
