@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
                   :password, :password_confirmation
 
   has_secure_password
-  has_many :microposts
+  has_many :microposts, dependent: :destroy
 
 
   validates :common_name, :email, :first_name, :last_name, :nickname,  presence: true
