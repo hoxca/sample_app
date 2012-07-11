@@ -33,7 +33,7 @@ module SessionsHelper
     user == current_user
   end
 
-  def store_location
+def store_location
     session[:return_to] = request.fullpath
   end
 

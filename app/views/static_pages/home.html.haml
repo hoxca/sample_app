@@ -5,6 +5,10 @@
         = render 'shared/user_info'
       %section
         = render 'shared/micropost_form'
+    %div{ class: "span7" }
+      %h3
+        Microposts feed
+      = render 'shared/feed'
 - else
   %div{ class: ["center","hero-unit"]}
     %h1 Welcome to the Sample App
